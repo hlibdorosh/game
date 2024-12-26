@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple PWA game with Bootstrap-enhanced menu">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Escape Challenge</title>
+</head>
+<body>
+<div id="game-container" class="d-flex flex-column align-items-center justify-content-center">
+    <h1 class="text-center mb-4" style="font-family: 'Bangers', Arial, sans-serif;">Escape Challenge</h1>
+    <div id="menu" class="d-flex flex-column align-items-center p-4 bg-white rounded shadow">
+        <a href="index.html" id="play-button" class="btn btn-primary mb-3">Play</a>
+        <button id="instructions-button" class="btn btn-secondary mb-3">Instructions</button>
+        <button id="toggle-extra" class="btn btn-warning mt-4">Show Extra Content</button>
+    </div>
+    <div id="extra-content" class="mt-4 p-3 bg-light border rounded" hidden>
+        <p>This is extra content that can be toggled on and off.</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('toggle-extra').addEventListener('click', () => {
+        const extraContent = document.getElementById('extra-content');
+        extraContent.hidden = !extraContent.hidden;
+    });
+</script>
+</body>
+</html>

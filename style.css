@@ -1,0 +1,45 @@
+/* Global Styles for Both Pages */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Bangers', Arial, sans-serif; /* Fun, bold font */
+    background-color: #f7f4ea; /* Soft beige background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #5a5a5a; /* Neutral gray for text */
+}
+
+/* Title Styling */
+h1 {
+    color: #7a645f; /* Warm brown color for the title */
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Dramatic shadow for impact */
+}
+
+/* Button Styling */
+a.btn, button.btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 10px auto;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #c39b77; /* Muted brown for buttons */
+    border: none;
+    font-family: 'Bangers', Arial, sans-serif; /* Match button font with title */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a.btn:hover, button.btn:hover {
+    background-color: #a67854; /* Darker shade for hover effect */
+    transform: translateY(-3px);
+}
