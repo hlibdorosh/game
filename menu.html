@@ -8,20 +8,29 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/icon.png" type="image/png">
+
     <title>Escape Challenge</title>
 </head>
 <body>
-<div id="game-container" class="d-flex flex-column align-items-center justify-content-center">
-    <h1 class="text-center mb-4" style="font-family: 'Bangers', Arial, sans-serif;">Escape Challenge</h1>
-    <div id="menu" class="d-flex flex-column align-items-center p-4 bg-white rounded shadow">
-        <a href="index.html" id="play-button" class="btn btn-primary mb-3">Play</a>
-        <button id="instructions-button" class="btn btn-secondary mb-3">Instructions</button>
-        <button id="toggle-extra" class="btn btn-warning mt-4">Show Extra Content</button>
+<header class="header">
+    <h1>Escape Challenge</h1>
+</header>
+
+<div id="game-container" class="content">
+    <div id="menu">
+        <a href="index.html" id="play-button" class="btn">Play</a>
+        <a href="rules.html" id="instructions-button" class="btn">Instructions</a>
+        <button id="toggle-extra" class="btn">Show Extra Content</button>
     </div>
-    <div id="extra-content" class="mt-4 p-3 bg-light border rounded" hidden>
+    <div id="extra-content" hidden>
         <p>This is extra content that can be toggled on and off.</p>
     </div>
 </div>
+
+<footer class="footer">
+    Escape Challenge &copy; 2024. All rights reserved. | Designed with care.
+</footer>
 
 <script>
     document.getElementById('toggle-extra').addEventListener('click', () => {
