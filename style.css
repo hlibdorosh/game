@@ -106,3 +106,6 @@ h1 {
     padding: 15px 0;
     font-size: 0.9rem;
 }
+
+/* Font Linking for All Pages */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
