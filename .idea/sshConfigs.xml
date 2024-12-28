@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="webte1.fei.stuba.sk" id="f68705d1-b481-49db-8668-7450b273e194" port="22" nameFormat="DESCRIPTIVE" username="xdorosh" useOpenSSHConfig="true" />
+      <sshConfig authType="PASSWORD" host="webte1.fei.stuba.sk" id="be7b8627-7b21-4fec-9a70-eeb8a6784c32" port="22" nameFormat="DESCRIPTIVE" username="xbanyk" useOpenSSHConfig="true" />
     </configs>
   </component>
 </project>
