@@ -249,7 +249,14 @@ instructionsButton.addEventListener('click', () => {
 backToMenuButton.addEventListener('click', () => {
     instructions.hidden = true;
     menu.hidden = false;
+
+    // Reset the level type to an empty string
+    const levelTypeElement = document.getElementById('level-type');
+    if (levelTypeElement) {
+        levelTypeElement.textContent = ""; // Clear the level type
+    }
 });
+
 
 const keys = {
     w: false,
@@ -593,6 +600,7 @@ function completeLevel(levelId) {
     }
 
     if (completedLevels.length === levels.length) {
+
         showCompletionModal(); // Показати модальне вікно, якщо всі рівні завершені
     } else {
         startNextLevel(); // Почати наступний рівень
@@ -611,6 +619,12 @@ function showCompletionModal() {
     gameRunning = false;
 
     if (document.getElementById('completion-modal')) return;
+
+    const levelTypeElement = document.getElementById('level-type');
+    if (levelTypeElement) {
+        levelTypeElement.textContent = ""; // Clear the level type
+    }
+
 
     // Створення елементу для затемнення фону
     const overlay = document.createElement('div');
@@ -714,6 +728,13 @@ function stopTimer() {
 
 // Функція для скидання стану гри
 function resetGame(caught) {
+
+    const levelTypeElement = document.getElementById('level-type');
+    if (levelTypeElement) {
+        levelTypeElement.textContent = ""; // Clear the level type
+    }
+
+
     completedLevels = [];
     currentLevel = null;
     yellowCoinCounter = 0;
@@ -768,6 +789,14 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 
+function updateLevelType(level) {
+    const levelTypeElement = document.getElementById('level-type');
+    if (levelTypeElement) {
+        levelTypeElement.textContent = level.description; // Use the description of the current level
+    }
+
+
+}
 
 
 function startGame() {
@@ -781,16 +810,18 @@ function startGame() {
 
     console.log(`Поточний рівень: ${currentLevel.description}`);
 
+    // Update the game title with the level type
+    updateLevelType(currentLevel);
+
     bullets.length = 0;
     blueCoins = [];
     yellowCoins = [];
     blueCoinCounter = 0;
     yellowCoinCounter = 0;
     gameRunning = false;
-    // Викликаємо створення ворогів з параметрами рівня
+
+    // Create enemies based on level parameters
     createEnemies(currentLevel.enemyCount, currentLevel.enemySpeed);
-
-
 
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     drawBackground();
@@ -799,18 +830,21 @@ function startGame() {
     drawBlueCoins();
     drawYellowCoins();
     drawScore();
-    // Якщо рівень типу "timer", запускаємо таймер
+
+    // If level type is "timer", start the timer
     if (currentLevel.type === "timer") {
         startTimer(currentLevel.duration, () => {
             console.log("Час завершився! Рівень завершено!");
-            checkLevelGoal(); // Викликаємо перевірку мети рівня
+            checkLevelGoal();
         });
     } else {
-        stopTimer(); // Зупиняємо таймер для інших типів рівнів
+        stopTimer();
     }
+
     setTimeout(() => {
         gameRunning = true;
         gameLoop();
     }, 2000);
 }
+
 
