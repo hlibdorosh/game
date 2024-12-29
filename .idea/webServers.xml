@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="e97e53d1-ee87-45be-b899-3492dced7ddc" name="game">
-        <fileTransfer rootFolder="/home/xbanyk/public_html" accessType="SFTP" host="webte1.fei.stuba.sk" port="22" sshConfigId="be7b8627-7b21-4fec-9a70-eeb8a6784c32" sshConfig="xbanyk@webte1.fei.stuba.sk:22 password">
+        <fileTransfer rootFolder="/home/xdorosh/public_html" accessType="SFTP" host="webte1.fei.stuba.sk" port="22" sshConfigId="be7b8627-7b21-4fec-9a70-eeb8a6784c32" sshConfig="xdorosh@webte1.fei.stuba.sk:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

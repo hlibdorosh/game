@@ -2,7 +2,7 @@
   {
     "id": 1,
     "type": "collect_y",
-    "description": "Зберіть 10 жовтих монет",
+    "description": "Collect 5 yellow coins",
     "targetYellowCoins": 5,
     "enemyCount": 7,
     "enemySpeed": 2
@@ -10,22 +10,22 @@
   {
     "id": 2,
     "type": "collect_b",
-    "description": "Зберіть 15 голубих монет",
-    "targetBlueCoins": 5,
+    "description": "collect 10 silver coins",
+    "targetBlueCoins": 10,
     "enemyCount": 5,
     "enemySpeed": 2
   },
   {
     "id": 3,
     "type": "feed",
-    "description": "Накорми 5 зайців",
+    "description": "Feed 3 rabbits",
     "targetFeed": 3,
     "enemyCount": 5,
     "enemySpeed": 2
   },
   {
     "id": 4,
-    "description": "Пройдіть рівень за 30 секунд!",
+    "description": "Last for 15 seconds",
     "type": "timer",
     "duration": 15,
     "enemyCount": 10,

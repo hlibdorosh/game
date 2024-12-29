@@ -58,6 +58,11 @@ const rabbitUpRightFrames = [];
 const rabbitDownLeftFrames = [];
 const rabbitDownRightFrames = [];
 
+document.getElementById('toggle-extra').addEventListener('click', function() {
+    const extraContent = document.getElementById('extra-content');
+    extraContent.hidden = !extraContent.hidden;
+});
+
 // Load frames for each movement direction
 for (let i = 1; i <= 8; i++) {
     // Rabbit moving up-left
@@ -402,18 +407,27 @@ function moveEnemies() {
 let canShoot = true;
 
 function shootBullet() {
-    if (keys.Space && canShoot && (player.lastDirection.x !== 0 || player.lastDirection.y !== 0)) {
+    if (keys.Space && canShoot) {
         canShoot = false;
         setTimeout(() => canShoot = true, 200);
+
+        let bulletDirection = { x: player.lastDirection.x, y: player.lastDirection.y };
+
+        // If the player is idle, set bullet direction to upward
+        if (bulletDirection.x === 0 && bulletDirection.y === 0) {
+            bulletDirection = { x: 0, y: -1 }; // Default to shooting upward
+        }
+
         bullets.push({
             x: player.x + player.size / 2,
             y: player.y + player.size / 2,
-            dx: player.lastDirection.x * BULLET_SPEED,
-            dy: player.lastDirection.y * BULLET_SPEED,
+            dx: bulletDirection.x * BULLET_SPEED,
+            dy: bulletDirection.y * BULLET_SPEED,
             traveled: 0,
         });
     }
 }
+
 
 let hitCounter = 0; // Лічильник попадань у ворогів
 
