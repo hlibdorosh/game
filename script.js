@@ -9,6 +9,10 @@ const instructions = document.getElementById('instructions');
 const gameCanvas = document.getElementById('game-canvas');
 const ctx = gameCanvas.getContext('2d');
 
+const boonImage = new Image();
+boonImage.src = 'assets/boom.png';
+
+
 const backgroundImage = new Image();
 backgroundImage.src = 'assets/trol.jpg';
 
@@ -446,8 +450,8 @@ function moveBullets() {
 
         const BULLET_SIZE = 20; // Adjust size for the carrot sprite
 
-// Update bullet collision checks if necessary
-        enemies.forEach(enemy => {
+        // Update bullet collision checks
+        enemies.forEach((enemy) => {
             if (
                 enemy.alive &&
                 bullet.x + BULLET_SIZE / 2 > enemy.x &&
@@ -455,20 +459,32 @@ function moveBullets() {
                 bullet.y + BULLET_SIZE / 2 > enemy.y &&
                 bullet.y - BULLET_SIZE / 2 < enemy.y + enemy.size
             ) {
+                // Handle collision
                 enemy.alive = false;
-                enemy.x = -enemy.size;
-                enemy.y = -enemy.size;
                 bullets.splice(index, 1);
-                hitCounter++; // Збільшуємо лічильник попадань
+                hitCounter++; // Increment hit counter
+
+                // Calculate boon position
+                const boonX = enemy.x + enemy.size / 2 - 25; // Center boon on enemy
+                const boonY = enemy.y + enemy.size / 2 - 25; // Center boon on enemy
+
+                // Display the boon image
+                ctx.drawImage(boonImage, boonX, boonY, 50, 50);
+
+                // Remove the boon after 0.5 seconds
+                setTimeout(() => {
+                    ctx.clearRect(boonX, boonY, 50, 50);
+                }, 100);
             }
         });
 
-
+        // Remove the bullet if it has traveled beyond its range
         if (bullet.traveled > BULLET_RANGE) {
             bullets.splice(index, 1);
         }
     });
 }
+
 
 function drawBullets() {
     bullets.forEach((bullet) => {
