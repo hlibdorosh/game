@@ -3,7 +3,7 @@
     "id": 1,
     "type": "collect_y",
     "description": "Collect 5 yellow coins",
-    "targetYellowCoins": 5,
+    "targetYellowCoins": 1,
     "enemyCount": 7,
     "enemySpeed": 2
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "type": "collect_b",
     "description": "collect 10 silver coins",
-    "targetBlueCoins": 10,
+    "targetBlueCoins": 1,
     "enemyCount": 5,
     "enemySpeed": 2
   },
@@ -27,7 +27,7 @@
     "id": 4,
     "description": "Last for 15 seconds",
     "type": "timer",
-    "duration": 15,
+    "duration": 5,
     "enemyCount": 10,
     "enemySpeed": 2
   }
