@@ -4,8 +4,8 @@
     "type": "collect_y",
     "description": "Collect 5 yellow coins",
     "targetYellowCoins": 5,
-    "enemyCount": 7,
-    "enemySpeed": 2
+    "enemyCount": 5,
+    "enemySpeed": 4
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "description": "collect 10 silver coins",
     "targetBlueCoins": 10,
     "enemyCount": 5,
-    "enemySpeed": 2
+    "enemySpeed": 4
   },
   {
     "id": 3,
@@ -21,15 +21,15 @@
     "description": "Feed 3 rabbits",
     "targetFeed": 3,
     "enemyCount": 5,
-    "enemySpeed": 2
+    "enemySpeed": 4
   },
   {
     "id": 4,
     "description": "Last for 15 seconds",
     "type": "timer",
     "duration": 15,
-    "enemyCount": 10,
-    "enemySpeed": 2
+    "enemyCount": 7,
+    "enemySpeed": 4
   }
 
 ]
