@@ -235,15 +235,68 @@ function checkCoinCollision() {
 
 let gameRunning = false;
 
+let useGyroscope = false;
+
+// Initialize gyroscope controls for Android
+function initializeGyroscope() {
+    if (window.DeviceOrientationEvent) {
+        useGyroscope = true;
+        window.addEventListener('deviceorientation', handleGyroscope);
+        console.log('Gyroscope initialized.');
+    } else {
+        console.log('Gyroscope not supported on this device.');
+    }
+}
+
+// Handle gyroscope data for movement
+function handleGyroscope(event) {
+    if (!gameRunning) return;
+
+    const tiltX = event.gamma; // Left-to-right tilt (-90 to 90)
+    const tiltY = event.beta;  // Front-to-back tilt (-180 to 180)
+
+    const threshold = 5; // Ignore small tilts
+    const speedMultiplier = 0.2; // Adjust speed sensitivity
+
+    // Determine movement and update player position
+    let moved = false;
+    if (Math.abs(tiltX) > threshold) {
+        player.x += tiltX * speedMultiplier;
+        player.x = Math.max(0, Math.min(player.x, GAME_WIDTH - player.size));
+        player.lastDirection.x = tiltX > 0 ? 1 : -1; // Right or left
+        moved = true;
+    } else {
+        player.lastDirection.x = 0;
+    }
+
+    if (Math.abs(tiltY) > threshold) {
+        player.y += tiltY * speedMultiplier;
+        player.y = Math.max(0, Math.min(player.y, GAME_HEIGHT - player.size));
+        player.lastDirection.y = tiltY > 0 ? 1 : -1; // Down or up
+        moved = true;
+    } else {
+        player.lastDirection.y = 0;
+    }
+
+    // If no movement, reset direction to idle
+    if (!moved) {
+        player.lastDirection.x = 0;
+        player.lastDirection.y = 0;
+    }
+}
+
+// Start gyroscope controls when the game begins
 playButton.addEventListener('click', () => {
+    initializeGyroscope(); // Enable gyroscope
     menu.hidden = true;
     gameCanvas.hidden = false;
     loadLevels().then(() => {
         startGame();
     }).catch((error) => {
-        console.error("Не вдалося завантажити рівні:", error);
+        console.error("Failed to load levels:", error);
     });
 });
+
 
 instructionsButton.addEventListener('click', () => {
     menu.hidden = true;
@@ -314,44 +367,37 @@ function movePlayer() {
 }
 
 function drawPlayer(timestamp) {
-    // Save the current canvas state
     ctx.save();
 
-    // Move the canvas origin to the player's center
     const playerCenterX = player.x + player.size / 2;
     const playerCenterY = player.y + player.size / 2;
     ctx.translate(playerCenterX, playerCenterY);
 
-    // Calculate the rotation angle (add adjustment for -90 degrees)
-    const angle = Math.atan2(player.lastDirection.y, player.lastDirection.x) + Math.PI / 2; // Add 90 degrees
+    const angle = Math.atan2(player.lastDirection.y, player.lastDirection.x) + Math.PI / 2;
+
     if (player.lastDirection.x !== 0 || player.lastDirection.y !== 0) {
-        ctx.rotate(angle); // Rotate player to face the direction
+        ctx.rotate(angle); // Rotate the player based on direction
     }
 
-    // Check if the player is idle
     if (player.lastDirection.x === 0 && player.lastDirection.y === 0) {
-        // Draw the idle sprite (p0) if the player is not moving
-        ctx.drawImage(
-            idleFrame,                // Idle sprite
-            -player.size / 2, -player.size / 2, // Destination x, y (centered)
-            player.size, player.size  // Destination width, height
-        );
+        // Idle sprite
+        ctx.drawImage(idleFrame, -player.size / 2, -player.size / 2, player.size, player.size);
     } else {
-        // Update the current frame based on time
+        // Update animation frames
         if (timestamp - lastFrameTime > frameDuration) {
-            currentFrame = (currentFrame + 1) % totalFrames; // Cycle through frames
+            currentFrame = (currentFrame + 1) % totalFrames;
             lastFrameTime = timestamp;
         }
 
-        // Draw the current frame
         ctx.drawImage(
-            runFrames[currentFrame],    // Current frame image
-            -player.size / 2, -player.size / 2, // Destination x, y (centered)
-            player.size, player.size   // Destination width, height
+            runFrames[currentFrame],
+            -player.size / 2,
+            -player.size / 2,
+            player.size,
+            player.size
         );
     }
 
-    // Restore the canvas state
     ctx.restore();
 }
 
